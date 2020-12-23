@@ -7,9 +7,10 @@
 | nickname         | string | null: false |
 | email            | string | null: false |
 |encrypted_password| string | null: false |
+| first_name       | string | null: false |add_column
+| last_name        | string | null: false |add_column
 | first_name_kana  | string | null: false |add_column
 | last_name_kana   | string | null: false |add_column
-| name_reading     | string | null: false |
 | birth_date       | date   | null: false |
 
 ### Association
@@ -20,17 +21,20 @@
 
 ## items テーブル
 
-|Column     | Type     | Options      |
-| --------- | -------- | ------------ |
-| name      |  string  | null: false  |
-| text      |  text    | null: false  |
-| price     | integer  | null: false  |
-|Category_id| integer  | null: false  |
-|Status_id  | integer  | null: false  |
+|Column               | Type     | Options      |
+| ---------------     | -------- | ------------ |
+| name                |  string  | null: false  |
+| text                |  text    | null: false  |
+| price               | integer  | null: false  |
+|Category_id          | integer  | null: false  |
+|Status_id            | integer  | null: false  |
+|Shipping_fee_id      | integer  | null: false  |
+|Prefecture_id        | integer  | null: false  |
+|scheduled_delivery_id| integer  | null: false  |
 
 ### Association
 - belongs_to : user
-- belongs_to : order
+- has_many   : order
 
 ## orders テーブル
 
@@ -42,7 +46,7 @@
 
 ### Association
 - belongs_to : user
-- has_many : items
+- belongs_to : items
 - has_one : address
 
 ## address テーブル
@@ -53,8 +57,9 @@
 | prefecture  (都道府県)     | integer    | null: false                    |
 |city (市町村)               | string     | null: false                    |
 |house_number(丁目、番地、号)| string     | null: false                    |
-|building_name(建物名)       | string     | null: false                    |
+|building_name(建物名)       | string     |                                |
 |phone_number (電話番号)     | string     | null: false                    |
+|order                       |references  |null: false, foreign_key: true  |
 
 ### Association
 - belongs_to :order
