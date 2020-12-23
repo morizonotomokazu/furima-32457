@@ -2,15 +2,15 @@
 
 ## users テーブル
 
-| Column         | Type   | Options     |
-| -------------- | ------ | ----------- |
-| nickname       | string | null: false |
-| email          | string | null: false |
-| password       | string | null: false |
-| first_name     | string | null: false |add_column
-| last_name      | string | null: false |add_column
-| name_reading   | string | null: false |
-| user_birth_date| integer| null: false |
+| Column           | Type   | Options     |
+| ---------------- | ------ | ----------- |
+| nickname         | string | null: false |
+| email            | string | null: false |
+|encrypted_password| string | null: false |
+| first_name_kana  | string | null: false |add_column
+| last_name_kana   | string | null: false |add_column
+| name_reading     | string | null: false |
+| birth_date       | date   | null: false |
 
 ### Association
 - has_many :items
@@ -20,16 +20,17 @@
 
 ## items テーブル
 
-| Column    | Type     | Options                         |
-| --------  | -------- | ------------------------------- |
-| image     | string   | null: false                     |
-| item_name |  text    | null: false                     |
-| item_text |  text    | null: false                     |
-| item_price| integer  | null: false                     |
+|Column     | Type     | Options      |
+| --------- | -------- | ------------ |
+| name      |  string  | null: false  |
+| text      |  text    | null: false  |
+| price     | integer  | null: false  |
+|Category_id| integer  | null: false  |
+|Status_id  | integer  | null: false  |
 
 ### Association
-- belongs_to : users
-- belongs_to : orders
+- belongs_to : user
+- belongs_to : order
 
 ## orders テーブル
 
@@ -40,7 +41,7 @@
 
 
 ### Association
-- belongs_to : users
+- belongs_to : user
 - has_many : items
 - has_one : address
 
@@ -56,4 +57,4 @@
 |phone_number (電話番号)     | string     | null: false                    |
 
 ### Association
-- belongs_to :orders
+- belongs_to :order
