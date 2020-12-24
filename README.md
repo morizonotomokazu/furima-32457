@@ -21,20 +21,22 @@
 
 ## items テーブル
 
-|Column               | Type     | Options      |
-| ---------------     | -------- | ------------ |
-| name                |  string  | null: false  |
-| text                |  text    | null: false  |
-| price               | integer  | null: false  |
-|Category_id          | integer  | null: false  |
-|Status_id            | integer  | null: false  |
-|Shipping_fee_id      | integer  | null: false  |
-|Prefecture_id        | integer  | null: false  |
-|scheduled_delivery_id| integer  | null: false  |
+|Column               | Type     | Options                         |
+| ---------------     | -------- | ------------------------------- |
+| name                |  string  | null: false                     |
+| text                |  text    | null: false                     |
+| price               | integer  | null: false                     |
+|category_id          | integer  | null: false                     |
+|status_id            | integer  | null: false                     |
+|shipping_fee_id      | integer  | null: false                     |
+|prefecture_id        | integer  | null: false                     |
+|scheduled_delivery_id| integer  | null: false                     |
+|user                 |references| null: false, foreign_key: true  |
+|order                |references| null: false, foreign_key: true  |
 
 ### Association
 - belongs_to : user
-- has_many   : order
+- belongs_to : order
 
 ## orders テーブル
 
@@ -46,7 +48,7 @@
 
 ### Association
 - belongs_to : user
-- belongs_to : items
+- has_many   : item
 - has_one : address
 
 ## address テーブル
@@ -54,12 +56,12 @@
 | Column                     | Type       | Options                        |
 | -------------------------- | -------    | -----------------------------  |
 | postal_code (郵便番号)     | string     | null: false                    |
-| prefecture  (都道府県)     | integer    | null: false                    |
+| prefecture_id (都道府県)   | integer    | null: false                    |
 |city (市町村)               | string     | null: false                    |
 |house_number(丁目、番地、号)| string     | null: false                    |
 |building_name(建物名)       | string     |                                |
 |phone_number (電話番号)     | string     | null: false                    |
-|order                       |references  |null: false, foreign_key: true  |
+|order                       |references  | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :order
