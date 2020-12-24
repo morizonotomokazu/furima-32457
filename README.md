@@ -32,11 +32,10 @@
 |prefecture_id        | integer  | null: false                     |
 |scheduled_delivery_id| integer  | null: false                     |
 |user                 |references| null: false, foreign_key: true  |
-|order                |references| null: false, foreign_key: true  |
 
 ### Association
 - belongs_to : user
-- belongs_to : order
+- has_one :orders
 
 ## orders テーブル
 
@@ -48,7 +47,7 @@
 
 ### Association
 - belongs_to : user
-- has_many   : item
+- belongs_to : item
 - has_one : address
 
 ## address テーブル
