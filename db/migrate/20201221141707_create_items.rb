@@ -3,7 +3,7 @@ class CreateItems < ActiveRecord::Migration[6.0]
     create_table :items do |t|
       t.string        :items_neme     ,null: false
 
-      
+
       t.timestamps
     end
   end
