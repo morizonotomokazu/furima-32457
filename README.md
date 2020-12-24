@@ -5,12 +5,12 @@
 | Column           | Type   | Options     |
 | ---------------- | ------ | ----------- |
 | nickname         | string | null: false |
-| email            | string | null: false |
+| email            | string | unique: true|
 |encrypted_password| string | null: false |
-| first_name       | string | null: false |add_column
-| last_name        | string | null: false |add_column
-| first_name_kana  | string | null: false |add_column
-| last_name_kana   | string | null: false |add_column
+| first_name       | string | null: false |
+| last_name        | string | null: false |
+| first_name_kana  | string | null: false |
+| last_name_kana   | string | null: false |
 | birth_date       | date   | null: false |
 
 ### Association
@@ -35,7 +35,7 @@
 
 ### Association
 - belongs_to : user
-- has_one :orders
+- has_one :order
 
 ## orders テーブル
 
