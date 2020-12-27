@@ -1,9 +1,10 @@
 class ItemsController < ApplicationController
-<<<<<<< Updated upstream
+
   def index
-     
+
   end
-=======
+
+
   # before_action :move_to_index, except: [:index, :show]
   before_action :authenticate_user!,except: [:index]
   before_action :set_item, except: [:index, :new, :create]
@@ -39,6 +40,4 @@ class ItemsController < ApplicationController
       # redirect_to action: :index
     # end
 
-  
->>>>>>> Stashed changes
 end

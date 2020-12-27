@@ -10,12 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< Updated upstream
-ActiveRecord::Schema.define(version: 0) do
-=======
-<<<<<<< Updated upstream
-ActiveRecord::Schema.define(version: 0) do
-=======
+
 ActiveRecord::Schema.define(version: 2020_12_26_091134) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -71,9 +66,10 @@ ActiveRecord::Schema.define(version: 2020_12_26_091134) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+s
+
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "users"
+
 end
