@@ -9,15 +9,7 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.integer     :shipping_fee_id           ,null: false
       t.integer     :prefecture_id             ,null: false
       t.integer     :scheduled_delivery_id     ,null: false
-<<<<<<< Updated upstream:db/migrate/20201221141707_create_items.rb
       t.references  :user                      , foreign_key: true
-=======
-      t.references  :user                      ,foreign_key: true
-
-    
-
-
->>>>>>> Stashed changes:db/migrate/20201225141707_create_items.rb
       t.timestamps
     end
   end
