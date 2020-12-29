@@ -9,9 +9,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!,except: [:index]
   before_action :set_item, except: [:index, :new, :create]
 
-  def index
-    @item = Item.includes(:user)
-  end
+  
 
   def new
      @item = Item.new
@@ -34,10 +32,4 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
-
-   # def move_to_index
-    # unless user_signed_in?
-      # redirect_to action: :index
-    # end
-
 end

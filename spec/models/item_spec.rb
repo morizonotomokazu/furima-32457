@@ -57,12 +57,12 @@ RSpec.describe Item, type: :model do
        expect(@item.errors.full_messages).to include("Image can't be blank")
      end
      it "priceの範囲が、¥299以下場合は登録できない" do
-       @item.price = "299"
+       @item.price = 299
        @item.valid?
        expect(@item.errors.full_messages).to include("Price must be greater than 299")
      end
      it "priceの範囲が、¥10,000,000場合は登録できない"do
-       @item.price = "10000000"
+       @item.price = 10000000
        @item.valid?
        expect(@item.errors.full_messages).to include( "Price must be less than 10000000")
      end
@@ -87,6 +87,31 @@ RSpec.describe Item, type: :model do
        @item.price = "漢字"
        @item.valid?
        expect(@item.errors.full_messages).to include("Price is not a number")
+     end
+     it "category_id,が1の場合は登録できない"do
+       @item.category_id = 1
+       @item.valid?
+       expect(@item.errors.full_messages).to include("Category must be other than 1")
+     end
+     it "status_id,が1の場合は登録できない"do
+       @item.status_id = 1
+       @item.valid?
+       expect(@item.errors.full_messages).to include("Status must be other than 1")
+     end
+     it "shipping_fee_id,が1の場合は登録できない"do
+       @item.shipping_fee_id = 1
+       @item.valid?
+       expect(@item.errors.full_messages).to include("Shipping fee must be other than 1")
+     end
+     it "prefecture_id,が1の場合は登録できない"do
+       @item.prefecture_id = 1
+       @item.valid?
+       expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
+     end
+     it "scheduled_delivery_id,が1の場合は登録できない"do
+       @item.scheduled_delivery_id = 1
+       @item.valid?
+       expect(@item.errors.full_messages).to include("Scheduled delivery must be other than 1")
      end
     end
   end
