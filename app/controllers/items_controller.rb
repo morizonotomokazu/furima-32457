@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!,except: [:index]
-  before_action :set_item, except: [:index, :new, :create]
+  before_action :authenticate_user!,except: [:index,:show]
+  before_action :set_item, except: [:index,:new,:create]
 
   def index
-    @items = Item.includes(:user).order("created_at ASC")
+    @items = Item.includes(:user).order("created_at DESC")
   end
 
   def new
@@ -18,6 +18,21 @@ class ItemsController < ApplicationController
       render :new
     end
   end
+  # def destroy
+    # if item.destroy
+        #  redirect_to root_path
+    # else
+        #  render :show
+    # end
+  # end
+
+  def show
+    @item = Item.find(params[:id])
+  end
+
+   
+
+
 
   private
   def item_params
