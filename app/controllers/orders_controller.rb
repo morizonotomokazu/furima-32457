@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :move_to_index
+  before_action :sold_out_item, only: [:index]
+
   def index
     @item = Item.find(params[:item_id])
     @credit = Credit.new
@@ -7,18 +10,37 @@ class OrdersController < ApplicationController
 
   def create
     @item = Item.find(params[:item_id])
-    @credit = Credit.new
+    @credit = Credit.new(purchase_params)
     if @credit.valid?
+      pay_item
       @credit.save
       return redirect_to root_path
     else
-      return 'index'
+      return render 'index'
     end
   end
 
   private
   def purchase_params
-    params.permit(:postal_code,:city,:house_number,:building_name,:phone_number,:prefecture_id,:item_id,:order_id).merge(user_id: current_user.id)
+    params.require(:credit).permit(:postal_code, :prefecture_id, :city, :house_number,:building_name,:phone_number).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
   end
 
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item.price ,
+      card: purchase_params[:token],
+      currency: 'jpy'
+    )
+  end
+
+  def move_to_index
+    @item = Item.find(params[:item_id])
+    unless @item.user_id != current_user.id
+      redirect_to root_path
+    end
+    def sold_out_item
+      redirect_to root_path if @item.order.present?
+     end
+  end
 end
