@@ -3,8 +3,7 @@ RSpec.describe Credit, type: :model do
   before do
     buyer = FactoryBot.create(:user )
     seller = FactoryBot.create(:user )
-    item = FactoryBot.build(:item, user_id: seller.id)
-    item.save
+    item = FactoryBot.create(:item, user_id: seller.id)
     @credit = FactoryBot.build(:credit, user_id: buyer.id, item_id: item.id )
   end
 
