@@ -1,12 +1,16 @@
 require 'rails_helper'
 RSpec.describe Credit, type: :model do
   before do
-    @credit = FactoryBot.build(:credit)
+    buyer = FactoryBot.create(:user )
+    seller = FactoryBot.create(:user )
+    item = FactoryBot.build(:item, user_id: seller.id)
+    item.save
+    @credit = FactoryBot.build(:credit, user_id: buyer.id, item_id: item.id )
   end
 
   describe '商品購入が成功した場合の処理' do
     context  '商品購入が成功したとき' do
-      it "user_id、item_id、postal_code、prefecture_id、city 、house_number、phone_number 、building_name、tokenが存在すれば登録できる" do
+      it "user_id、item_id、 postal_code、prefecture_id、city 、house_number、phone_number 、building_name、tokenが存在すれば登録できる" do
         expect(@credit.valid?).to eq true
       end
       it '建物名が空でも購入できること' do
@@ -83,6 +87,7 @@ RSpec.describe Credit, type: :model do
       it "phone_numberがひらがな、カタカナでは登録できない" do
         @credit.phone_number = "あイうエおええええええ"
         @credit.valid?
+        
         expect(@credit.errors.full_messages).to include("Phone number is invalid")
       end
       it "postal_codeが英数字混合では登録できない" do
