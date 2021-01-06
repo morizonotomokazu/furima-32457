@@ -2,14 +2,12 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :move_to_index
   before_action :sold_out_item, only: [:index]
-
+  before_action :credit_item,only: [:index,:create]
   def index
-    @item = Item.find(params[:item_id])
     @credit = Credit.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @credit = Credit.new(purchase_params)
     if @credit.valid?
       pay_item
@@ -43,5 +41,9 @@ class OrdersController < ApplicationController
     def sold_out_item
         redirect_to root_path if @item.order.present?
     end
+    def credit_item
+      @item = Item.find(params[:item_id])
+    end
+  
   
 end
