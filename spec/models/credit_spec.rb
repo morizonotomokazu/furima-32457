@@ -6,8 +6,12 @@ RSpec.describe Credit, type: :model do
 
   describe '商品購入が成功した場合の処理' do
     context  '商品購入が成功したとき' do
-      it "user_id、item_id、postal_code、prefecture_id、city 、house_number、phone_number 、tokenが存在すれば登録できる" do
+      it "user_id、item_id、postal_code、prefecture_id、city 、house_number、phone_number 、building_name、tokenが存在すれば登録できる" do
         expect(@credit.valid?).to eq true
+      end
+      it '建物名が空でも購入できること' do
+        @credit.building_name = ""
+        expect(@credit).to be_valid
       end
     end
     context '商品購入に失敗した場合の処理' do
